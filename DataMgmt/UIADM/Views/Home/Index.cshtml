@@ -1,0 +1,24 @@
+﻿@model UIADM.ViewModels.SummaryInfo
+
+<h3>Summary Info</h3>
+
+<table>
+    <tr>
+        <td class="summTitle">@Html.LabelFor(m=>m.TestCaseNo)</td>
+        <td class="summValue">@Model.TestCaseNo</td>
+    </tr>
+    <tr>
+        <td class="summTitle">@Html.LabelFor(m=>m.GlobalSettingNo)</td>
+        <td class="summValue">@Model.GlobalSettingNo</td>
+    </tr>
+    <tr>
+        <td class="summTitle">@Html.LabelFor(m=>m.TestDataNo)</td>
+        <td class="summValue">@Model.TestDataNo</td>
+    </tr>
+    <tr>
+        <td class="summTitle">@Html.LabelFor(m=>m.ControlNo)</td>
+        <td class="summValue">@Model.ControlNo</td>
+    </tr>
+</table>
+
+ 

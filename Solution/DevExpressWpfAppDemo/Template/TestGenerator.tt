@@ -1,0 +1,48 @@
+﻿<#@ template debug="false" language="C#" hostspecific="true"#>
+<#@ output extension="/" #>
+<#@include file="$(SolutionDir)DevExpressWpfAppDemo\Manager.ttinclude"#>
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+<#
+
+string fileList="4221,4222,4223";
+string[] arrClass = fileList.Split(',');
+foreach (var className in arrClass)
+{
+	manager.StartNewFile(className + ".cs");
+#>using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UIA.Framework.Core;
+using UIA.Application.DevExpressWpfAppDemo.ReusableComponent;
+using System.Windows.Automation;
+using UIA.Framework.Core.CustomControl;
+
+namespace UIA.Application.DevExpressWpfAppDemo.TestCase
+{
+	[TestClass]
+	public class _<#=className#> : TestBase
+	{
+		public _<#=className#>()	: base("<#=className#>")
+		{
+		}
+
+		[TestMethod]
+		public void TC_<#=className#>()
+		{
+			this.Logger.ScenarioStart(1, "Navigate to Cedent Data Management");
+			this.NavigateToCedentDataManagement();
+			this.Logger.ScenarioEnd(1);
+
+			this.Logger.ScenarioStart(2, "");
+			
+			this.Logger.ScenarioEnd(2);
+		}
+	}
+}
+
+
+<#
+	manager.EndBlock();
+}
+
+manager.Process(true);
+#>

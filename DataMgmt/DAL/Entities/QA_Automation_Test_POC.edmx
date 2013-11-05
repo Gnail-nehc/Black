@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QA_Automation_Test_POC_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="QA_Automation_Test_POC_ModelStoreContainer">
+          <EntitySet Name="Control" EntityType="QA_Automation_Test_POC_Model.Store.Control" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="ControlProperty" EntityType="QA_Automation_Test_POC_Model.Store.ControlProperty" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="ControlType" EntityType="QA_Automation_Test_POC_Model.Store.ControlType" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="GlobalSetting" EntityType="QA_Automation_Test_POC_Model.Store.GlobalSetting" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="Project" EntityType="QA_Automation_Test_POC_Model.Store.Project" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="TestData" EntityType="QA_Automation_Test_POC_Model.Store.TestData" store:Type="Tables" Schema="QA_Automation_Test" />
+        </EntityContainer>
+        <EntityType Name="Control">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="PropertyId" Type="int" Nullable="false" />
+          <Property Name="PropertyValue" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ControlProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Property" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ControlType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Platform" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GlobalSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Value" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Platform" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TestData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="TestCaseId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Value" Type="varchar" MaxLength="100" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QA_Automation_Test_POC_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QADB_Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Controls" EntityType="QA_Automation_Test_POC_Model.Control" />
+          <EntitySet Name="ControlProperties" EntityType="QA_Automation_Test_POC_Model.ControlProperty" />
+          <EntitySet Name="ControlTypes" EntityType="QA_Automation_Test_POC_Model.ControlType" />
+          <EntitySet Name="GlobalSettings" EntityType="QA_Automation_Test_POC_Model.GlobalSetting" />
+          <EntitySet Name="Projects" EntityType="QA_Automation_Test_POC_Model.Project" />
+          <EntitySet Name="TestDatas" EntityType="QA_Automation_Test_POC_Model.TestData" />
+          <AssociationSet Name="ControlControlProperty" Association="QA_Automation_Test_POC_Model.ControlControlProperty">
+            <End Role="Control" EntitySet="Controls" />
+            <End Role="ControlProperty" EntitySet="ControlProperties" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Control">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="PropertyId" Type="Int32" Nullable="false" />
+          <Property Name="PropertyValue" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ControlProperty" Relationship="QA_Automation_Test_POC_Model.ControlControlProperty" FromRole="Control" ToRole="ControlProperty" />
+        </EntityType>
+        <EntityType Name="ControlProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Property" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ControlType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Platform" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GlobalSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Value" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Platform" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="TestCaseId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Value" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="ControlControlProperty">
+          <End Type="QA_Automation_Test_POC_Model.Control" Role="Control" Multiplicity="*" />
+          <End Type="QA_Automation_Test_POC_Model.ControlProperty" Role="ControlProperty" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ControlProperty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Control">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QA_Automation_Test_POC_ModelStoreContainer" CdmEntityContainer="QADB_Entities">
+          <EntitySetMapping Name="Controls">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.Control">
+              <MappingFragment StoreEntitySet="Control">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyValue" ColumnName="PropertyValue" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlProperties">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.ControlProperty">
+              <MappingFragment StoreEntitySet="ControlProperty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlTypes">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.ControlType">
+              <MappingFragment StoreEntitySet="ControlType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlobalSettings">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.GlobalSetting">
+              <MappingFragment StoreEntitySet="GlobalSetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestDatas">
+            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.TestData">
+              <MappingFragment StoreEntitySet="TestData">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TestCaseId" ColumnName="TestCaseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

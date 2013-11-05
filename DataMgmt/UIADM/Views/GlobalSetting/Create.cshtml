@@ -1,0 +1,39 @@
+﻿@model DAL.Entities.GlobalSetting
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    Html.EnableClientValidation();
+}
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "dataadded" }))
+{
+    <table id="dataadded">
+        <tr>
+            <th>@Html.LabelFor(m => m.Name)</th>
+            <th>@Html.LabelFor(m => m.Value)</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(m => m.Name, new { @class="unifiedtextbox", @Value=""})
+                @Html.ValidationMessageFor(m => m.Name)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Value, new { @class="unifiedtextbox", @Value=""})
+            </td>
+        </tr>
+        <tr>
+            <td><input name="save" type="image" src="~/Images/save.png" class="imgbtn" title="Save" /></td>
+            <td><input name="cancel" type="image" src="~/Images/cancel.png" class="imgbtn" title="Cancel" /></td>
+        </tr>
+    </table>
+    
+}
+
+@if (null != ViewBag.Log)
+{
+    <p style="color:red">
+    @ViewBag.Log
+    </p>
+}

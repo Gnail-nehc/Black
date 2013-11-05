@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{D4852BE9-E739-4410-928D-8BAE6B68A2DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AUT", "AUT", "{52FED49B-A19F-4E35-8908-CBF1FF8B18D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIA.Framework.Core", "UIA.Framework.Core\UIA.Framework.Core.csproj", "{12F17077-B664-4EA9-8630-112B4F121634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpressWpfAppDemo", "DevExpressWpfAppDemo\DevExpressWpfAppDemo.csproj", "{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12F17077-B664-4EA9-8630-112B4F121634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F17077-B664-4EA9-8630-112B4F121634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F17077-B664-4EA9-8630-112B4F121634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F17077-B664-4EA9-8630-112B4F121634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12F17077-B664-4EA9-8630-112B4F121634} = {D4852BE9-E739-4410-928D-8BAE6B68A2DE}
+		{AFFFCF5D-1587-4C8D-8007-6D63237CDBAF} = {52FED49B-A19F-4E35-8908-CBF1FF8B18D9}
+	EndGlobalSection
+EndGlobal

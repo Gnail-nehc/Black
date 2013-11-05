@@ -1,0 +1,98 @@
+﻿
+<div>
+    <table>
+        <tr>
+            <th>Project Name</th>
+            <th>Tech. Platform</th>
+        </tr>
+        <tbody>
+            <!-- ko foreach: allProjects-->
+            <tr>
+                <td>
+                    <input type="text" data-bind="value: ProjectName" class="prjinput" />
+                </td>
+                <td data-bind="text: Platform" />
+
+                <td>
+                    <a href="#" data-bind="click: $root.updateProject">
+                        <img src="~/Images/save.png" class="imgbtn" />
+                    </a>
+                    <a href="#" data-bind="click: $root.deleteProject">
+                        <img src="~/Images/delete.png" class="imgbtn" />
+                    </a>
+                </td>
+            </tr>
+            <!-- /ko -->
+            <tr data-bind="with: addedProject">
+                <td>
+                    <input type="text" data-bind="value: ProjectName" class="prjinput" />
+                </td>
+                <td>
+                    <select data-bind="options: $root.availPlatforms, value: Platform, optionsValue: 'Platform', optionsText: 'Platform' "/>
+                </td>
+                <td>
+                    <a href="#" data-bind="click: $root.addProject">
+                        <img src="~/Images/add.png" class="imgbtn" />
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="~/Scripts/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>
+<script type="text/javascript">
+    function ProjectViewModel() {
+        var self = this;
+        self.availPlatforms = ko.observableArray([{ "Platform": "UIA" }, { "Platform": "Web" }, { "Platform": "Win" }]);
+        self.allProjects = ko.observableArray();
+        self.addedProject = ko.observable();
+        self.loadProjects = function () {
+            $.get("/api/manageproject", null, function (data) {
+                self.allProjects(data);
+                var emptyProject = { Id: 0, ProjectName: "", Platform: "" };
+                self.addedProject(emptyProject);
+            });
+        };
+
+        self.addProject = function (data) {
+            if (!self.validate(data)) {
+                return;
+            }
+            $.ajax({
+                url: "/api/manageproject/",
+                data: self.addedProject(),
+                type: "PUT",
+                success: self.loadProjects
+            });
+        };
+
+        self.updateProject = function (data) {
+            $.ajax({
+                url: "/api/manageproject/",
+                data: data,
+                type: "POST",
+                success: self.loadProjects
+            });
+        };
+
+        self.deleteProject = function (data) {
+            $.ajax({
+                url: "/api/manageproject/" + data.Id,
+                type: "DELETE",
+                success: self.loadProjects
+            });
+        };
+
+        self.validate = function (data) {
+            if (data.ProjectName && data.Platform) {
+                return true;
+            }
+            alert("Validate failed for input data! Prjname:" + String(data.ProjectName) + " Platform:" + String(data.ProjectName));
+            return false;
+        }
+        self.loadProjects();
+    }
+    ko.applyBindings(new ProjectViewModel());
+</script>

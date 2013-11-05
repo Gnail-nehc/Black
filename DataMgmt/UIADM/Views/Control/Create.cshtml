@@ -1,0 +1,43 @@
+﻿@model DAL.Entities.Control
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Html.EnableClientValidation();
+}
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "dataadded" }))
+{
+    <table id="dataadded">
+        <tr>
+            <th>@Html.LabelFor(m => m.ControlProperty.Type)</th>
+            <th>@Html.LabelFor(m => m.ControlProperty.Property)</th>
+            <th>@Html.LabelFor(m => m.PropertyValue)</th>
+            <th>@Html.LabelFor(m => m.Name)</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DropDownListFor(m=>m.ControlProperty.Type,Enumerable.Empty<SelectListItem>(),new { @class = "unifiedddl" })
+                @Html.ValidationMessageFor(m => m.ControlProperty.Type)
+            </td>
+            <td>
+                @Html.DropDownListFor(m=>m.ControlProperty.Property,Enumerable.Empty<SelectListItem>(),new { @class = "unifiedddl" })
+                @Html.ValidationMessageFor(m => m.ControlProperty.Property)
+            </td>
+            <td>@Html.TextBoxFor(m => m.PropertyValue, new { @Value = "", @class="unifiedtextbox" })</td>
+            <td>@Html.TextBoxFor(m => m.Name, new { @Value = "", @class="unifiedtextbox" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </td>
+        </tr>
+		<tr>
+			<td><input name="save" type="image" src="~/Images/save.png" class="imgbtn" title="Save" /></td>
+			<td><input name="cancel" type="image" src="~/Images/cancel.png" class="imgbtn" title="Cancel" /></td>
+		</tr>
+    </table>   
+}
+@if (null != ViewBag.Log)
+{
+    <p style="color:red">
+    @ViewBag.Log
+    </p>
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/control.ajax-bindDropdownlistWhenCreation.js")"></script>

@@ -1,0 +1,75 @@
+﻿@model UIADM.ViewModels.GlobalSettingInfo
+@using UIADM.Extensions
+
+@{
+    Html.EnableClientValidation();
+}
+
+@{
+    UIADM.ViewModels.PagingInfo pagingInfo = new UIADM.ViewModels.PagingInfo
+    {
+         PageIndex = (int)ViewBag.PageIndex,
+         RecordCount = (int)ViewBag.RecordCount
+    };
+    Func<int, UrlHelper, string> pageUrlAccessor = (Func<int, UrlHelper,string>)ViewBag.PageUrlAccessor;
+}
+
+<p>
+    @Ajax.ActionLink("New","Create","GlobalSetting",null,new AjaxOptions{UpdateTargetId="body"},new { @class="imgCreation",@title="add a Global Data" })
+</p>
+
+<div class="paging">@Html.PageLinks(pagingInfo, pageIndex=>pageUrlAccessor(pageIndex,Url))</div>
+
+
+
+<table>
+    <tr>
+        <th>@Html.LabelFor(m => m.SelectedGlobalSetting.Name)</th>
+        <th>@Html.LabelFor(m => m.SelectedGlobalSetting.Value)</th>
+    </tr>
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "tbody" }))
+{
+    <tr>
+        <td>@Html.TextBoxFor(m => m.QueryConditionEntity.Name, new { @class="unifiedtextbox", @Value = "" })</td>
+        <td>@Html.TextBoxFor(m => m.QueryConditionEntity.Value, new { @class="unifiedtextbox", @Value = "" })</td>
+        <td><input name="query" type="image" src="~/Images/query.png" class="imgbtn" title="Query"/></td>
+    </tr>
+}
+    <tbody id="tbody">
+@foreach (var item in Model.GlobalSettings)
+{
+    using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "updateditem" }))
+    {
+    <tr id="updateditem">@Html.HiddenFor(m => m.SelectedGlobalSetting.Id, new { @Value=item.Id})
+    @if (!object.Equals(item.Id, Session["UpdatedId_g"]))
+    {
+        <td>@item.Name</td>
+        <td>@item.Value</td>
+        <td><input name="edit" type="image" src="~/Images/edit.png" class="imgbtn" title="Edit" /></td>
+        <td>
+            <input name="delete" type="image" src="~/Images/delete.png" class="imgbtn" title="Delete" onclick="return confirm('Are you sure to delete?');" />
+        </td>
+    }
+    else
+    {
+        <td>@Html.TextBoxFor(m => m.SelectedGlobalSetting.Name, new { @class="unifiedtextbox", @Value=item.Name})
+            @Html.ValidationMessageFor(m => m.SelectedGlobalSetting.Name)
+        </td>
+        <td>@Html.TextBoxFor(m => m.SelectedGlobalSetting.Value, new { @class="unifiedtextbox", @Value=item.Value})</td>
+        <td><input name="save" type="image" src="~/Images/save.png" class="imgbtn" title="Save" /></td>         
+        <td><input name="cancel" type="image" src="~/Images/cancel.png" class="imgbtn" title="Back" /></td>
+    }
+    </tr>
+    }
+}
+    </tbody>
+</table>
+
+@if (null != Session["Log_g"])
+{
+    <p style="color:red">
+        @Session["Log_g"].ToString()
+    </p>
+}
+
+<div class="paging">@Html.PageLinks(pagingInfo, pageIndex=>pageUrlAccessor(pageIndex,Url))</div>

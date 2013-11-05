@@ -1,0 +1,92 @@
+﻿@model UIADM.ViewModels.ControlInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using UIADM.Extensions
+@{
+    Html.EnableClientValidation();
+}
+@{
+    UIADM.ViewModels.PagingInfo pagingInfo = new UIADM.ViewModels.PagingInfo
+    {
+        PageIndex = (int)ViewBag.PageIndex,
+        RecordCount = (int)ViewBag.RecordCount
+    };
+    Func<int, UrlHelper, string> pageUrlAccessor = (Func<int, UrlHelper, string>)ViewBag.PageUrlAccessor;
+}
+
+<p>
+    @Ajax.ActionLink("New","Create","Control",null,new AjaxOptions{UpdateTargetId="body"},new { @class="imgCreation",@title="add a Data for control under test" })
+</p>
+<input type="hidden" id="url_lt" value="@Url.Action("LoadTypes","Control")" />
+<input type="hidden" id="url_lp" value="@Url.Action("LoadProperties","Control")" />
+
+<div class="paging">@Html.PageLinks(pagingInfo, pageIndex => pageUrlAccessor(pageIndex, Url))</div>
+
+<table>
+    <tr>
+        <th>@Html.LabelFor(ci => ci.SelectedControl.ControlProperty.Type)</th>
+        <th>@Html.LabelFor(ci => ci.SelectedControl.ControlProperty.Property)</th>
+        <th>@Html.LabelFor(ci => ci.SelectedControl.PropertyValue)</th>
+        <th>@Html.LabelFor(ci => ci.SelectedControl.Name)</th>
+    </tr>
+    
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "tbody" }))
+{
+    <tr>
+        <td>@Html.DropDownListFor(m=>m.SearchedConditionEntity.ControlType,Enumerable.Empty<SelectListItem>(),new { @class = "unifiedddl" })
+        </td>
+        <td>@Html.DropDownListFor(m=>m.SearchedConditionEntity.ControlProperty,Enumerable.Empty<SelectListItem>(),new { @class = "unifiedddl" })
+        </td>
+        <td>@Html.TextBoxFor(m => m.SearchedConditionEntity.PropertyValue, new { @Value = "", @class="unifiedtextbox" })</td>
+        <td>@Html.TextBoxFor(m => m.SearchedConditionEntity.ControlName, new { @Value = "", @class="unifiedtextbox" })</td>
+        <td><input name="query" type="image" src="~/Images/query.png" class="imgbtn" title="Query"/></td>
+    </tr>
+}
+    <tbody id="tbody">
+@foreach (var item in Model.Controls)
+{
+    using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "updateditem" }))
+    {
+    <tr id="updateditem">@Html.HiddenFor(m => m.SelectedControl.Id, new { @Value = item.Id })
+        @Html.HiddenFor(m => m.SelectedControl.ControlProperty.Type, new { @Value = item.ControlProperty.Type })
+        <td>@item.ControlProperty.Type</td>
+    @if (!object.Equals(item.Id, Session["UpdatedId_c"]))
+    {
+        <td>@item.ControlProperty.Property</td>
+        <td class="unifiedtextbox">@item.PropertyValue</td>
+        <td class="unifiedtextbox">@item.Name</td>
+        <td><input name="edit" type="image" src="~/Images/edit.png" class="imgbtn" title="Edit" /></td>
+        <td>
+            <input name="delete" type="image" src="~/Images/delete.png" class="imgbtn" title="Delete" onclick="return confirm('Are you sure to delete?');" />
+        </td>
+    }
+    else
+    {
+        <td>
+            @Html.DropDownListFor(m=>m.SelectedControl.ControlProperty.Property,Model.PropertyListWhenEdit,new { @Value=item.ControlProperty.Property,@class = "unifiedddl" })
+        </td>
+        <td>@Html.TextBoxFor(m => m.SelectedControl.PropertyValue, new { @Value = item.PropertyValue, @class="unifiedtextbox" })</td>
+        <td>@Html.TextBoxFor(m => m.SelectedControl.Name, new { @Value = item.Name, @class="unifiedtextbox" })
+            @Html.ValidationMessageFor(m => m.SelectedControl.Name)
+        </td>
+        <td><input name="save" type="image" src="~/Images/save.png" class="imgbtn" title="Save" /></td>         
+        <td><input name="cancel" type="image" src="~/Images/cancel.png" class="imgbtn" title="Back" /></td>
+    }
+    </tr>
+    }
+}
+    </tbody>
+</table>
+
+@if (null != Session["Log_c"])
+{
+    <p style="color:red">
+        @Session["Log_c"].ToString()
+    </p>
+}
+
+<div class="paging">@Html.PageLinks(pagingInfo, pageIndex => pageUrlAccessor(pageIndex, Url))</div>
+
+
+<script src="@Url.Content("~/Scripts/control.ajax-bindDropdownlist.js")" type="text/javascript"></script>

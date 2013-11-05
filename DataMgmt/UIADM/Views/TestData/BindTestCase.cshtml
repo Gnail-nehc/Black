@@ -1,0 +1,31 @@
+﻿@model DAL.Entities.TestData
+@{
+    Layout = null;
+}
+@{
+    Html.EnableClientValidation();
+}
+
+<h3 style="text-align:center">Enter Test Case ID:</h3>
+
+
+@using (Ajax.BeginForm("BindTestCase", "TestData", new AjaxOptions { UpdateTargetId = "entertc" }))
+{
+    <div id="entertc">
+        <table style="margin:auto">
+            <tr>
+                <td>
+                    <p>@Html.TextBoxFor(m => m.TestCaseId, new { @id="tcinput"})</p>
+                    <p style="color:red">@Html.ValidationMessageFor(m => m.TestCaseId)</p>
+                </td>
+                <td><input type="image" src="~/Images/go.png" id="imgGo" title="Go!"/></td>
+            </tr>
+            @if (null != Session["Log_bt"])
+            {
+                <tr style="color:red">
+                    <td>@Session["Log_bt"].ToString() ,@Html.ActionLink("Add","Create") this test case?</td>
+                </tr>
+            }
+        </table>
+    </div>
+}

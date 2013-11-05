@@ -1,0 +1,19 @@
+﻿@model UIADM.ViewModels.ProjectInfo
+@{
+    Layout = null;
+}
+
+<h3 style="text-align:center">Select Project:</h3>
+
+
+@using (Ajax.BeginForm("Index", "Project", new AjaxOptions { UpdateTargetId="project"}))
+{
+    <div id="project">
+        <table style="margin:auto">
+            <tr>
+                <td>@Html.DropDownListFor(m => m.TProperty, Model.ProjectItems.OrderByDescending(sli=>sli.Value), new { @class="unifedddl"})</td>
+                <td><input type="image" src="~/Images/go.png" id="imgGo" title="Go!"/></td>
+            </tr>
+        </table>
+    </div>
+}

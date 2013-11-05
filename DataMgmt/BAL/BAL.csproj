@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FEEBF66C-7F90-4C71-8DDC-BE4CCAA3BE83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BAL</RootNamespace>
+    <AssemblyName>BAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IControlPropertyRepository.cs" />
+    <Compile Include="Interfaces\IControlRepository.cs" />
+    <Compile Include="Interfaces\IControlTypeRepository.cs" />
+    <Compile Include="Interfaces\IHomeService.cs" />
+    <Compile Include="Interfaces\ITestDataRepository.cs" />
+    <Compile Include="Interfaces\IGlobalSettingRepository.cs" />
+    <Compile Include="Interfaces\IControlService.cs" />
+    <Compile Include="Interfaces\IGlobalSettingService.cs" />
+    <Compile Include="Interfaces\IProjectRepository.cs" />
+    <Compile Include="Interfaces\IProjectService.cs" />
+    <Compile Include="Interfaces\IDefaultService.cs" />
+    <Compile Include="Interfaces\ITestDataService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ControlPropertyRepository.cs" />
+    <Compile Include="Repositories\ControlRepository.cs" />
+    <Compile Include="Repositories\ControlTypeRepository.cs" />
+    <Compile Include="Repositories\GlobalSettingRepository.cs" />
+    <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Repositories\TestDataRepository.cs" />
+    <Compile Include="Services\ControlService.cs" />
+    <Compile Include="Services\GlobalSettingService.cs" />
+    <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\TestDataService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{6c87005e-8e6a-481f-8a15-c2494c9a445f}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

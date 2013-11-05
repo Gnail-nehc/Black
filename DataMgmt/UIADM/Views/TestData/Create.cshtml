@@ -1,0 +1,49 @@
+﻿@model DAL.Entities.TestData
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.EnableClientValidation();
+}
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "dataadded" }))
+{
+    <table id="dataadded">
+        <tr>
+        @if (null == Session["TestCaseBound"])
+        { 
+            <th>@Html.LabelFor(m => m.TestCaseId)</th>
+        }
+            <th>@Html.LabelFor(m => m.Name)</th>
+            <th>@Html.LabelFor(m => m.Value)</th>
+        </tr>
+        <tr>
+        @if (null == Session["TestCaseBound"])
+        { 
+            <td>
+                @Html.TextBoxFor(m => m.TestCaseId, new { @Value="",@class="unifiedtextbox"})
+                @Html.ValidationMessageFor(m => m.TestCaseId)
+            </td>
+        }
+            <td>
+                @Html.TextBoxFor(m => m.Name, new { @Value="",@class="unifiedtextbox"})
+                @Html.ValidationMessageFor(m => m.Name)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Value, new { @Value="",@class="unifiedtextbox"})
+            </td>
+        </tr>
+        <tr>
+            <td><input name="save" type="image" src="~/Images/save.png" class="imgbtn" title="Save" /></td>
+            <td><input name="cancel" type="image" src="~/Images/cancel.png" class="imgbtn" title="Cancel" /></td>
+        </tr>
+    </table>
+    
+}
+
+@if (null != ViewBag.Log)
+{
+    <p style="color:red">
+    @ViewBag.Log
+    </p>
+}

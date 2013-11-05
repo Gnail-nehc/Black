@@ -1,0 +1,18 @@
+﻿@model UIADM.ViewModels.ProjectInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/thickbox.js" type="text/javascript"></script>
+<link rel="stylesheet" href="~/Content/thickbox.css" type="text/css" media="screen" />
+<script type="text/javascript">  
+    $(document).ready(function () {
+        $('a.thickbox').click();
+        $("#TB_overlay").unbind("click", tb_remove);
+        $("#TB_overlay").off('click');
+	});  
+</script> 
+
+<p>
+    @Html.ActionLink(".","SelectProject",new { height = 120, width = 400, modal = true }, new { @class = "thickbox"})
+</p>
