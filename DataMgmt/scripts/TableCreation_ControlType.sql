@@ -1,15 +1,13 @@
-USE [QA_Automation_Test_POC]
+USE [Automation]
 GO
 
-/****** Object:  Table [QA_Automation_Test].[ControlType]    Script Date: 03/01/2013 22:32:45 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[QA_Automation_Test].[ControlType]') AND type in (N'U'))
-DROP TABLE [QA_Automation_Test].[ControlType]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Automation].[ControlType]') AND type in (N'U'))
+DROP TABLE [Automation].[ControlType]
 GO
 
-USE [QA_Automation_Test_POC]
+USE [Automation]
 GO
 
-/****** Object:  Table [QA_Automation_Test].[ControlType]    Script Date: 03/01/2013 22:32:45 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,7 +17,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [QA_Automation_Test].[ControlType](
+CREATE TABLE [Automation].[ControlType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Type] [varchar](20) NOT NULL,
 	[Platform] [varchar](20) NULL,
