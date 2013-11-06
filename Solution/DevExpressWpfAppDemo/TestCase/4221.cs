@@ -8,17 +8,17 @@ using UIA.Framework.Core.CustomControl;
 namespace UIA.Application.DevExpressWpfAppDemo.TestCase
 {
 	[TestClass]
-	public class _4221 : TestBase
+	public class _1 : TestBase
 	{
-		public _4221()	: base("4221")
+		public _1()	: base("1")
 		{
 		}
 
 		[TestMethod]
-		public void TC_4221()
+		public void TC_1()
 		{
-			this.Logger.ScenarioStart(1, "Navigate to Cedent Data Management");
-			this.NavigateToCedentDataManagement();
+			this.Logger.ScenarioStart(1, "Navigate to XXX");
+			
 			this.Logger.ScenarioEnd(1);
 
 			this.Logger.ScenarioStart(2, "");
