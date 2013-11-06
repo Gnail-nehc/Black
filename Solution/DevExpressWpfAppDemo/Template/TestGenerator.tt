@@ -28,7 +28,7 @@ namespace UIA.Application.DevExpressWpfAppDemo.TestCase
 		[TestMethod]
 		public void TC_<#=className#>()
 		{
-			this.Logger.ScenarioStart(1, "Navigate to Cedent Data Management");
+			this.Logger.ScenarioStart(1, "Navigate to XXX");
 			this.NavigateToCedentDataManagement();
 			this.Logger.ScenarioEnd(1);
 
