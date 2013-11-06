@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QA_Automation_Test_POC_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="QA_Automation_Test_POC_ModelStoreContainer">
-          <EntitySet Name="Control" EntityType="QA_Automation_Test_POC_Model.Store.Control" store:Type="Tables" Schema="QA_Automation_Test" />
-          <EntitySet Name="ControlProperty" EntityType="QA_Automation_Test_POC_Model.Store.ControlProperty" store:Type="Tables" Schema="QA_Automation_Test" />
-          <EntitySet Name="ControlType" EntityType="QA_Automation_Test_POC_Model.Store.ControlType" store:Type="Tables" Schema="QA_Automation_Test" />
-          <EntitySet Name="GlobalSetting" EntityType="QA_Automation_Test_POC_Model.Store.GlobalSetting" store:Type="Tables" Schema="QA_Automation_Test" />
-          <EntitySet Name="Project" EntityType="QA_Automation_Test_POC_Model.Store.Project" store:Type="Tables" Schema="QA_Automation_Test" />
-          <EntitySet Name="TestData" EntityType="QA_Automation_Test_POC_Model.Store.TestData" store:Type="Tables" Schema="QA_Automation_Test" />
+      <Schema Namespace="Automation_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Automation_ModelStoreContainer">
+          <EntitySet Name="Control" EntityType="Automation_Model.Store.Control" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="ControlProperty" EntityType="Automation_Model.Store.ControlProperty" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="ControlType" EntityType="Automation_Model.Store.ControlType" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="GlobalSetting" EntityType="Automation_Model.Store.GlobalSetting" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="Project" EntityType="Automation_Model.Store.Project" store:Type="Tables" Schema="QA_Automation_Test" />
+          <EntitySet Name="TestData" EntityType="Automation_Model.Store.TestData" store:Type="Tables" Schema="QA_Automation_Test" />
         </EntityContainer>
         <EntityType Name="Control">
           <Key>
@@ -70,15 +70,15 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QA_Automation_Test_POC_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Automation_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="QADB_Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Controls" EntityType="QA_Automation_Test_POC_Model.Control" />
-          <EntitySet Name="ControlProperties" EntityType="QA_Automation_Test_POC_Model.ControlProperty" />
-          <EntitySet Name="ControlTypes" EntityType="QA_Automation_Test_POC_Model.ControlType" />
-          <EntitySet Name="GlobalSettings" EntityType="QA_Automation_Test_POC_Model.GlobalSetting" />
-          <EntitySet Name="Projects" EntityType="QA_Automation_Test_POC_Model.Project" />
-          <EntitySet Name="TestDatas" EntityType="QA_Automation_Test_POC_Model.TestData" />
-          <AssociationSet Name="ControlControlProperty" Association="QA_Automation_Test_POC_Model.ControlControlProperty">
+          <EntitySet Name="Controls" EntityType="Automation_Model.Control" />
+          <EntitySet Name="ControlProperties" EntityType="Automation_Model.ControlProperty" />
+          <EntitySet Name="ControlTypes" EntityType="Automation_Model.ControlType" />
+          <EntitySet Name="GlobalSettings" EntityType="Automation_Model.GlobalSetting" />
+          <EntitySet Name="Projects" EntityType="Automation_Model.Project" />
+          <EntitySet Name="TestDatas" EntityType="Automation_Model.TestData" />
+          <AssociationSet Name="ControlControlProperty" Association="Automation_Model.ControlControlProperty">
             <End Role="Control" EntitySet="Controls" />
             <End Role="ControlProperty" EntitySet="ControlProperties" />
           </AssociationSet>
@@ -92,7 +92,7 @@
           <Property Name="PropertyId" Type="Int32" Nullable="false" />
           <Property Name="PropertyValue" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="ControlProperty" Relationship="QA_Automation_Test_POC_Model.ControlControlProperty" FromRole="Control" ToRole="ControlProperty" />
+          <NavigationProperty Name="ControlProperty" Relationship="Automation_Model.ControlControlProperty" FromRole="Control" ToRole="ControlProperty" />
         </EntityType>
         <EntityType Name="ControlProperty">
           <Key>
@@ -138,8 +138,8 @@
           <Property Name="Value" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
         <Association Name="ControlControlProperty">
-          <End Type="QA_Automation_Test_POC_Model.Control" Role="Control" Multiplicity="*" />
-          <End Type="QA_Automation_Test_POC_Model.ControlProperty" Role="ControlProperty" Multiplicity="1" />
+          <End Type="Automation_Model.Control" Role="Control" Multiplicity="*" />
+          <End Type="Automation_Model.ControlProperty" Role="ControlProperty" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="ControlProperty">
               <PropertyRef Name="Id" />
@@ -154,9 +154,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QA_Automation_Test_POC_ModelStoreContainer" CdmEntityContainer="QADB_Entities">
+        <EntityContainerMapping StorageEntityContainer="Automation_ModelStoreContainer" CdmEntityContainer="QADB_Entities">
           <EntitySetMapping Name="Controls">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.Control">
+            <EntityTypeMapping TypeName="Automation_Model.Control">
               <MappingFragment StoreEntitySet="Control">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -167,7 +167,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ControlProperties">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.ControlProperty">
+            <EntityTypeMapping TypeName="Automation_Model.ControlProperty">
               <MappingFragment StoreEntitySet="ControlProperty">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -176,7 +176,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ControlTypes">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.ControlType">
+            <EntityTypeMapping TypeName="Automation_Model.ControlType">
               <MappingFragment StoreEntitySet="ControlType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -185,7 +185,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GlobalSettings">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.GlobalSetting">
+            <EntityTypeMapping TypeName="Automation_Model.GlobalSetting">
               <MappingFragment StoreEntitySet="GlobalSetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -195,7 +195,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.Project">
+            <EntityTypeMapping TypeName="Automation_Model.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
@@ -204,7 +204,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestDatas">
-            <EntityTypeMapping TypeName="QA_Automation_Test_POC_Model.TestData">
+            <EntityTypeMapping TypeName="Automation_Model.TestData">
               <MappingFragment StoreEntitySet="TestData">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
