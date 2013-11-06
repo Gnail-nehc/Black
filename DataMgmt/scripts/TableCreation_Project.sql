@@ -3,7 +3,7 @@ GO
 
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Automation].[Project]') AND type in (N'U'))
-DROP TABLE [QA_Automation_Test].[Project]
+DROP TABLE [Automation].[Project]
 GO
 
 USE [Automation]
