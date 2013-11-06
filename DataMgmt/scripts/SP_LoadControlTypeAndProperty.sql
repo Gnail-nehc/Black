@@ -1,15 +1,13 @@
-USE [QA_Automation_Test_POC]
+USE [Automation]
 GO
 
-/****** Object:  StoredProcedure [QA_Automation_Test].[LoadControlTypeAndProperty]    Script Date: 07/04/2013 04:02:06 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[QA_Automation_Test].[LoadControlTypeAndProperty]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [QA_Automation_Test].[LoadControlTypeAndProperty]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Automation].[LoadControlTypeAndProperty]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [Automation].[LoadControlTypeAndProperty]
 GO
 
-USE [QA_Automation_Test_POC]
+USE [Automation]
 GO
 
-/****** Object:  StoredProcedure [QA_Automation_Test].[LoadControlTypeAndProperty]    Script Date: 07/04/2013 04:02:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -24,7 +22,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [QA_Automation_Test].[LoadControlTypeAndProperty]
+CREATE PROCEDURE [Automation].[LoadControlTypeAndProperty]
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -4626,18 +4624,18 @@ BEGIN
 	  </Tech>
 	</UIMap>
 	'
-	IF  EXISTS (SELECT top 1 Id FROM [QA_Automation_Test].[ControlType])
-		truncate table [QA_Automation_Test].[ControlType]
+	IF  EXISTS (SELECT top 1 Id FROM [Automation].[ControlType])
+		truncate table [Automation].[ControlType]
 	
-	insert into QA_Automation_Test.ControlType([Type],[Platform])
+	insert into Automation.ControlType([Type],[Platform])
 	select T.C.value('local-name(.)','varchar(20)') as Type,
 	T.C.value('../@platform','varchar(50)') as Platform
 	from @data.nodes('//Tech[@platform]/*') as T(C)
 	
-	IF  EXISTS (SELECT top 1 Id FROM [QA_Automation_Test].[ControlProperty])
-		truncate table [QA_Automation_Test].[ControlProperty]
+	IF  EXISTS (SELECT top 1 Id FROM [Automation].[ControlProperty])
+		truncate table [Automation].[ControlProperty]
 	
-	insert into QA_Automation_Test.ControlProperty([Type],[Property])
+	insert into Automation.ControlProperty([Type],[Property])
 	select T.C.value('local-name(..)','varchar(20)') as Type,
 	T.C.value('local-name(.)','varchar(20)') as Property
 	from @data.nodes('//Tech/*/*') as T(C)
