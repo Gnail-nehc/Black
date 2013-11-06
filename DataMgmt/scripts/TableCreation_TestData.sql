@@ -1,9 +1,8 @@
 USE [Automation]
 GO
 
-
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Automation].[TestData]') AND type in (N'U'))
-DROP TABLE [QA_Automation_Test].[TestData]
+DROP TABLE [Automation].[TestData]
 GO
 
 USE [Automation]
