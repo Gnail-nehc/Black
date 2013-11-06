@@ -18,7 +18,7 @@ namespace UIA.Application.DevExpressWpfAppDemo.TestCase
 		public void TC_1()
 		{
 			this.Logger.ScenarioStart(1, "Navigate to XXX");
-			
+			this.NavigateToHomeScreen();
 			this.Logger.ScenarioEnd(1);
 
 			this.Logger.ScenarioStart(2, "");
