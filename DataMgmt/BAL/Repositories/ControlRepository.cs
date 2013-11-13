@@ -36,16 +36,16 @@ namespace BAL.Repositories
 
         public IEnumerable<Control> QueryControls(int prjId, string controlType, string controlProperty, string propertyValue, string controlName, int pageIndex, int pageSize,out int recordCount)
         {
-			propertyValue = propertyValue.Trim();
-			controlName = controlName.Trim();
-			Expression<Func<Control, bool>> expression = c =>
-				controlType != "" ? c.ControlProperty.Type == controlType : true &&
-				controlProperty != "" ? c.ControlProperty.Property == controlProperty : true &&
-				propertyValue != "" ? c.PropertyValue.Contains(propertyValue) : true &&
-				controlName != "" ? c.Name.Contains(controlName) : true &&
-				c.ProjectId == prjId;
-			IEnumerable<Control> controls = this.Get(expression, pageIndex, pageSize, c => c.Id, true);
-			recordCount = this.Count(expression);
+	    propertyValue = propertyValue.Trim();
+	    controlName = controlName.Trim();
+	    Expression<Func<Control, bool>> expression = c => c.ProjectId == prjId && (
+	    controlType != "" ? c.ControlProperty.Type == controlType : true &&
+		controlProperty != "" ? c.ControlProperty.Property == controlProperty : true &&
+		propertyValue != "" ? c.PropertyValue.Contains(propertyValue) : true &&
+		controlName != "" ? c.Name.Contains(controlName) : true
+		);
+	    IEnumerable<Control> controls = this.Get(expression, pageIndex, pageSize, c => c.Id, true);
+	    recordCount = this.Count(expression);
             return controls;
         }
 
